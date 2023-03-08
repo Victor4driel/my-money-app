@@ -1,8 +1,7 @@
 const _ = require('lodash')
-const nodeRestful = require('node-restful')
 
 module.exports = (req, res, next) => {
-    const bundle = res.locals.bundle // local onde se encontra os erros
+    const bundle = res.locals.bundle
 
     if(bundle.errors) {
         const errors = parseErrors(bundle.errors)
@@ -12,8 +11,8 @@ module.exports = (req, res, next) => {
     }
 }
 
-const parseErrors = (nodeRestfulErros) => {
+const parseErrors = (nodeRestfulErrors) => {
     const errors = []
-    _.forIn(nodeRestfulErros, error => errors.push(error.message))
-    return errors
+    _.forIn(nodeRestfulErrors, error => errors.push(error.message))
+    return errors 
 }

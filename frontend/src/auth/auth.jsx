@@ -3,12 +3,14 @@ import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
 import { login, signup } from './authActions'
 import Row from '../common/layout/row'
 import Grid from '../common/layout/grid'
-
+import If from '../common/operator/if'
 import Messages from '../common/msg/messages'
 import Input from '../common/form/inputAuth'
+
 class Auth extends Component {
     constructor(props) {
         super(props)
@@ -61,7 +63,7 @@ class Auth extends Component {
         )
     }
 }
+
 Auth = reduxForm({ form: 'authForm' })(Auth)
-const mapDispatchToProps = dispatch => bindActionCreators({ login, signup },
-    dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ login, signup }, dispatch)
 export default connect(null, mapDispatchToProps)(Auth)

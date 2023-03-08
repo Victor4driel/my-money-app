@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react'
 
-export default props => {
-    return (
-        <footer className="main-footer">
-            <strong>
-                Copyright &copy; 2017
-                <a href="http://cod3r.com.br" target='_blank'> Cod3r</a>.
-            </strong>
-        </footer>
-    )
-}
+export default props => (
+    <footer className='main-footer'> 
+        <strong> 
+            Copyright &copy; 2017
+            <a href='http://cod3r.com.br' target='_blank'> Cod3r</a>.
+        </strong>
+    </footer>
+)

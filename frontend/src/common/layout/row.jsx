@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react'
 
-export default props => {
-    return (
-        <div className="row">{props.children}</div>
-    )
-}
+export default props => (
+    <div className='row'>{props.children}</div>
+)

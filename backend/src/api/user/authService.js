@@ -19,7 +19,7 @@ const login = (req, res, next) => {
 
     User.findOne({ email }, (err, user) => {
         if (err) {
-            return sendErrosFromDB(res, err)
+            return sendErrorsFromDB(res, err)
         } else if (user && bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign(user, env.authSecret, {
                 expiresIn: "1 day"
@@ -34,6 +34,7 @@ const login = (req, res, next) => {
 
 const validateToken = (req, res, next) => {
     const token = req.body.token || ''
+
     jwt.verify(token, env.authSecret, function (err, decoded) {
         return res.status(200).send({ valid: !err })
     })
@@ -52,7 +53,7 @@ const signup = (req, res, next) => {
     if (!password.match(passwordRegex)) {
         return res.status(400).send({
             errors: [
-                "Senha precisa ter: uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 6-20"
+                "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$ %) e tamanho entre 6-20."
             ]
         })
     }
@@ -60,7 +61,7 @@ const signup = (req, res, next) => {
     const salt = bcrypt.genSaltSync()
     const passwordHash = bcrypt.hashSync(password, salt)
     if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
-        return res.status(400).send({ errors: ['Senhas não conferem'] })
+        return res.status(400).send({ errors: ['Senhas não conferem.'] })
     }
 
     User.findOne({ email }, (err, user) => {
@@ -69,7 +70,7 @@ const signup = (req, res, next) => {
         } else if (user) {
             return res.status(400).send({ errors: ['Usuário já cadastrado.'] })
         } else {
-            const newUser = new user({ name, email, password: passwordHash })
+            const newUser = new User({ name, email, password: passwordHash })
             newUser.save(err => {
                 if (err) {
                     return sendErrorsFromDB(res, err)

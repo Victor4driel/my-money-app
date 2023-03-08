@@ -1,10 +1,10 @@
 import axios from 'axios'
+const BASE_URL = 'http://localhost:3003/api'
 
-const URL = 'http://localhost:3003/api'
-
-export const getSummary = () => {
-    return dispatch => {
-        const request = axios.get(`${URL}/billingCycles/summary`)
-            .then(resp => dispatch({type:'BILLING_SUMARRY_FETCHED', payload: resp}))
+export function getSummary() {
+    const request = axios.get(`${BASE_URL}/billingCycles/summary`)
+    return {
+        type: 'BILLING_SUMMARY_FETCHED',
+        payload: request
     }
 }
