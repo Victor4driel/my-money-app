@@ -30,7 +30,7 @@ export function logout() {
     return { type: 'TOKEN_VALIDATED', payload: false }
 }
 
-export function validatetoken(token) {
+export function validateToken(token) {
     return dispatch => {
         if(token) {
             axios.post(`${consts.OAPI_URL}/validateToken`, { token })
